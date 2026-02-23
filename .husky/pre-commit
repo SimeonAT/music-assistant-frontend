@@ -11,8 +11,6 @@ if [ -d "$HOME/.nvm" ]; then
 
   echo "Using NVM versions of Node.js and npm."
   nvm use default
-else
-  echo "Using Node.js version $($PATH/node --version) (npm version $($PATH/npm --version))"
 fi
 
 yarn lint
