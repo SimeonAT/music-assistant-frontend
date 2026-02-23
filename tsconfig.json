@@ -30,8 +30,8 @@
         "src/**/*.tsx",
         "src/**/*.d.ts",
         "src/**/*.vue",
-        "test/**/*.ts",
-        "test/**/*.tsx"
+        "tests/**/*.ts",
+        "tests/**/*.tsx"
     ],
     "references": [{ "path": "./tsconfig.node.json" }],
     "exclude": ["node_modules"]
