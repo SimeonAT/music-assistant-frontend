@@ -3,13 +3,16 @@
 # Ensure yarn is available in PATH
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 
-# Use default NVM versions of Node.js and `npm` if installed.
-if [ -f $HOME/.nvm ]; then
+# Use default NVM versions of Node.js and `npm` if yarn is installed there.
+if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+  echo "Using NVM versions of Node.js and npm."
   nvm use default
+else
+  echo "Using Node.js version $($PATH/node --version) (npm version $($PATH/npm --version))"
 fi
 
 yarn lint
