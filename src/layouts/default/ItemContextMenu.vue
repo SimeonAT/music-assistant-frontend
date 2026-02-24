@@ -247,6 +247,7 @@ import {
   QueueOption,
   Track,
 } from "@/plugins/api/interfaces";
+import { authManager } from "@/plugins/auth";
 import { $t } from "@/plugins/i18n";
 
 import type { Component } from "vue";
@@ -981,6 +982,46 @@ export const getContextMenuItems = async function (
         });
       },
       icon: "mdi-link",
+    });
+  }
+  // merge genres (admin only, all items must be library genres)
+  if (
+    items.every(
+      (i) => i.media_type === MediaType.GENRE && i.provider === "library",
+    ) &&
+    authManager.isAdmin()
+  ) {
+    contextMenuItems.push({
+      label: "merge_into",
+      labelArgs: [],
+      action: () => {
+        eventbus.emit("mergeGenreDialog", {
+          genreIds: items.map((i) => i.item_id),
+          genreNames: items.map((i) => i.name),
+        });
+        eventbus.emit("clearSelection");
+      },
+      icon: "mdi-merge",
+    });
+  }
+  // delete genre (admin only, single library genre)
+  if (
+    items.length === 1 &&
+    items[0].media_type === MediaType.GENRE &&
+    items[0].provider === "library" &&
+    authManager.isAdmin()
+  ) {
+    contextMenuItems.push({
+      label: "delete_genre",
+      labelArgs: [],
+      action: () => {
+        eventbus.emit("deleteGenreDialog", {
+          genreId: items[0].item_id,
+          navigateBack: items[0] === parentItem,
+        });
+        eventbus.emit("clearSelection");
+      },
+      icon: "mdi-delete",
     });
   }
   return contextMenuItems;

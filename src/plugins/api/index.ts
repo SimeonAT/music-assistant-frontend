@@ -1001,6 +1001,16 @@ export class MusicAssistantApi {
     });
   }
 
+  public mergeGenres(
+    genre_ids: string[],
+    target_genre_id: string,
+  ): Promise<Genre> {
+    return this.sendCommand("music/genres/merge", {
+      genre_ids,
+      target_genre_id,
+    });
+  }
+
   public async getGenreOverviewRows(
     item_id: string,
     provider_instance_id_or_domain: string,

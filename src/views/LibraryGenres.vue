@@ -117,8 +117,12 @@ const triggerRefresh = async () => {
 };
 
 onMounted(() => {
-  const unsub = api.subscribe(
-    EventType.MEDIA_ITEM_ADDED,
+  const unsub = api.subscribe_multi(
+    [
+      EventType.MEDIA_ITEM_ADDED,
+      EventType.MEDIA_ITEM_UPDATED,
+      EventType.MEDIA_ITEM_DELETED,
+    ],
     (evt: EventMessage) => {
       if (evt.object_id?.startsWith("library://genre")) {
         triggerRefresh();

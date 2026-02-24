@@ -1,5 +1,5 @@
 <template>
-  <Dialog v-model:open="model">
+  <Dialog v-model:open="open">
     <DialogContent class="sm:max-w-[520px]">
       <DialogHeader>
         <DialogTitle>{{ $t("delete_genre") }}</DialogTitle>
@@ -10,7 +10,7 @@
         </p>
       </div>
       <DialogFooter>
-        <Button type="button" variant="outline" @click="cancel">
+        <Button type="button" variant="outline" @click="open = false">
           {{ $t("cancel") }}
         </Button>
         <Button
@@ -35,18 +35,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { computed, ref, watch } from "vue";
+import { api } from "@/plugins/api";
+import { eventbus, type DeleteGenreDialogEvent } from "@/plugins/eventbus";
+import { store } from "@/plugins/store";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import { toast } from "vue-sonner";
 
-const model = defineModel<boolean>();
-const emit = defineEmits<{
-  confirm: [];
-}>();
-
 const { t } = useI18n();
+const router = useRouter();
+
+const open = ref(false);
 const loading = ref(false);
 const step = ref(1);
+const genreId = ref<string | null>(null);
+const navigateBack = ref(false);
 
 const confirmationMessage = computed(() => {
   return step.value === 1
@@ -58,26 +62,43 @@ const handleConfirm = () => {
   if (step.value === 1) {
     step.value = 2;
   } else {
+    if (!genreId.value) return;
     loading.value = true;
-    emit("confirm");
+    api.removeGenreFromLibrary(genreId.value);
     toast.success(t("genre_deleted"));
+    open.value = false;
+    if (navigateBack.value) {
+      router.back();
+    }
+    eventbus.emit("clearSelection");
   }
 };
 
-const cancel = () => {
-  model.value = false;
+const reset = () => {
+  genreId.value = null;
+  navigateBack.value = false;
+  loading.value = false;
+  step.value = 1;
 };
 
-watch(
-  () => model.value,
-  (isOpen) => {
-    if (!isOpen) {
-      // Reset to step 1 when dialog closes
-      setTimeout(() => {
-        step.value = 1;
-        loading.value = false;
-      }, 200);
-    }
-  },
-);
+watch(open, (v) => {
+  store.dialogActive = v;
+  if (!v) {
+    // Reset after close animation
+    setTimeout(reset, 200);
+  }
+});
+
+onMounted(() => {
+  eventbus.on("deleteGenreDialog", (evt: DeleteGenreDialogEvent) => {
+    reset();
+    genreId.value = evt.genreId;
+    navigateBack.value = evt.navigateBack ?? false;
+    open.value = true;
+  });
+});
+
+onBeforeUnmount(() => {
+  eventbus.off("deleteGenreDialog");
+});
 </script>
