@@ -334,6 +334,14 @@ watch(
   min-height: 60px;
 }
 
+.panel-item-details :deep(.v-list-item__spacer) {
+  width: 10px;
+}
+
+.player-media-thumb {
+  margin-right: 0px;
+}
+
 .volumesliderrow {
   margin-top: 0px;
   padding-top: 0px;
@@ -354,10 +362,6 @@ watch(
 }
 .volumesliderrow :deep(.v-expansion-panel-text__wrapper) {
   padding: 0;
-}
-
-.player-media-thumb {
-  margin-right: 10px;
 }
 
 .media-thumb {
