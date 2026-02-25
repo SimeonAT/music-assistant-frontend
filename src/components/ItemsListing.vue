@@ -262,6 +262,7 @@ export interface LoadDataParams {
   favoritesOnly?: boolean;
   albumArtistsFilter?: boolean;
   libraryOnly?: boolean;
+  hideEmptyFilter?: boolean;
   refresh?: boolean;
   albumType?: string[];
   provider?: string[];
@@ -286,6 +287,7 @@ export interface Props {
   title?: string;
   hideOnEmpty?: boolean;
   showLibraryOnlyFilter?: boolean;
+  showHideEmptyFilter?: boolean;
   allowCollapse?: boolean;
   allowKeyHooks?: boolean;
   extraMenuItems?: ToolBarMenuItem[];
@@ -323,6 +325,7 @@ const props = withDefaults(defineProps<Props>(), {
   infiniteScroll: true,
   title: undefined,
   showLibraryOnlyFilter: false,
+  showHideEmptyFilter: false,
   extraMenuItems: undefined,
   loadPagedData: undefined,
   loadItems: undefined,
@@ -464,6 +467,17 @@ const toggleAlbumArtistsFilter = function () {
     props.itemtype,
     "albumArtistsFilter",
     params.value.albumArtistsFilter,
+  );
+  loadData(undefined, undefined, true);
+};
+
+const toggleHideEmptyFilter = function () {
+  params.value.hideEmptyFilter = !params.value.hideEmptyFilter;
+  setItemsListingPreference(
+    props.path || props.itemtype,
+    props.itemtype,
+    "hideEmptyFilter",
+    params.value.hideEmptyFilter,
   );
   loadData(undefined, undefined, true);
 };
@@ -808,6 +822,21 @@ const menuItems = computed(() => {
     });
   }
 
+  // has media mappings filter (hide empty genres)
+  if (props.showHideEmptyFilter === true) {
+    items.push({
+      label: params.value.hideEmptyFilter
+        ? "tooltip.show_empty_genres"
+        : "tooltip.hide_empty_genres",
+      icon: params.value.hideEmptyFilter
+        ? "mdi-tag-check"
+        : "mdi-tag-check-outline",
+      action: toggleHideEmptyFilter,
+      active: params.value.hideEmptyFilter,
+      overflowAllowed: true,
+    });
+  }
+
   // album type filter
   if (props.showAlbumTypeFilter) {
     items.push({
@@ -1068,6 +1097,12 @@ const restoreSettings = async function () {
     prefs.albumArtistsFilter !== undefined
   ) {
     params.value.albumArtistsFilter = prefs.albumArtistsFilter;
+  }
+
+  // get stored/default hideEmptyFilter for this itemtype (default: on)
+  if (props.showHideEmptyFilter) {
+    params.value.hideEmptyFilter =
+      prefs.hideEmptyFilter !== undefined ? prefs.hideEmptyFilter : true;
   }
 
   // get stored/default expand property for this itemtype

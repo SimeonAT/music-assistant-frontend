@@ -909,6 +909,7 @@ export class MusicAssistantApi {
     order_by?: string,
     provider?: string | string[],
     genre?: number | number[],
+    hide_empty?: boolean,
   ): Promise<Genre[]> {
     return this.sendCommand("music/genres/library_items", {
       favorite,
@@ -918,6 +919,7 @@ export class MusicAssistantApi {
       order_by,
       provider,
       genre,
+      hide_empty,
     });
   }
 
@@ -998,6 +1000,16 @@ export class MusicAssistantApi {
     return this.sendCommand("music/genres/genres_for_media_item", {
       media_type,
       media_id,
+    });
+  }
+
+  public mergeGenres(
+    genre_ids: string[],
+    target_genre_id: string,
+  ): Promise<Genre> {
+    return this.sendCommand("music/genres/merge", {
+      genre_ids,
+      target_genre_id,
     });
   }
 
