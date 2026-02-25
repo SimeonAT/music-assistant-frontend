@@ -15,7 +15,7 @@
     :restore-state="restoreState"
     :total="total"
     :show-provider-filter="true"
-    :show-has-media-mappings-filter="true"
+    :show-hide-empty-filter="true"
     :extra-menu-items="extraMenuItems"
   />
   <AddGenreDialog v-model="showAddGenreDialog" @success="handleGenreAdded" />
@@ -78,7 +78,7 @@ const loadItems = async function (params: LoadDataParams) {
     params.sortBy,
     params.provider && params.provider.length > 0 ? params.provider : undefined,
     params.genreIds,
-    params.hasMediaMappingsFilter || undefined,
+    params.hideEmptyFilter ?? true,
   );
 };
 

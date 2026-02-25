@@ -259,7 +259,7 @@ export interface LoadDataParams {
   favoritesOnly?: boolean;
   albumArtistsFilter?: boolean;
   libraryOnly?: boolean;
-  hasMediaMappingsFilter?: boolean;
+  hideEmptyFilter?: boolean;
   refresh?: boolean;
   albumType?: string[];
   provider?: string[];
@@ -284,7 +284,7 @@ export interface Props {
   title?: string;
   hideOnEmpty?: boolean;
   showLibraryOnlyFilter?: boolean;
-  showHasMediaMappingsFilter?: boolean;
+  showHideEmptyFilter?: boolean;
   allowCollapse?: boolean;
   allowKeyHooks?: boolean;
   extraMenuItems?: ToolBarMenuItem[];
@@ -322,7 +322,7 @@ const props = withDefaults(defineProps<Props>(), {
   infiniteScroll: true,
   title: undefined,
   showLibraryOnlyFilter: false,
-  showHasMediaMappingsFilter: false,
+  showHideEmptyFilter: false,
   extraMenuItems: undefined,
   loadPagedData: undefined,
   loadItems: undefined,
@@ -468,13 +468,13 @@ const toggleAlbumArtistsFilter = function () {
   loadData(undefined, undefined, true);
 };
 
-const toggleHasMediaMappingsFilter = function () {
-  params.value.hasMediaMappingsFilter = !params.value.hasMediaMappingsFilter;
+const toggleHideEmptyFilter = function () {
+  params.value.hideEmptyFilter = !params.value.hideEmptyFilter;
   setItemsListingPreference(
     props.path || props.itemtype,
     props.itemtype,
-    "hasMediaMappingsFilter",
-    params.value.hasMediaMappingsFilter,
+    "hideEmptyFilter",
+    params.value.hideEmptyFilter,
   );
   loadData(undefined, undefined, true);
 };
@@ -813,16 +813,16 @@ const menuItems = computed(() => {
   }
 
   // has media mappings filter (hide empty genres)
-  if (props.showHasMediaMappingsFilter === true) {
+  if (props.showHideEmptyFilter === true) {
     items.push({
-      label: params.value.hasMediaMappingsFilter
+      label: params.value.hideEmptyFilter
         ? "tooltip.show_empty_genres"
         : "tooltip.hide_empty_genres",
-      icon: params.value.hasMediaMappingsFilter
+      icon: params.value.hideEmptyFilter
         ? "mdi-tag-check"
         : "mdi-tag-check-outline",
-      action: toggleHasMediaMappingsFilter,
-      active: params.value.hasMediaMappingsFilter,
+      action: toggleHideEmptyFilter,
+      active: params.value.hideEmptyFilter,
       overflowAllowed: true,
     });
   }
@@ -1089,12 +1089,10 @@ const restoreSettings = async function () {
     params.value.albumArtistsFilter = prefs.albumArtistsFilter;
   }
 
-  // get stored/default hasMediaMappingsFilter for this itemtype (default: on)
-  if (props.showHasMediaMappingsFilter) {
-    params.value.hasMediaMappingsFilter =
-      prefs.hasMediaMappingsFilter !== undefined
-        ? prefs.hasMediaMappingsFilter
-        : true;
+  // get stored/default hideEmptyFilter for this itemtype (default: on)
+  if (props.showHideEmptyFilter) {
+    params.value.hideEmptyFilter =
+      prefs.hideEmptyFilter !== undefined ? prefs.hideEmptyFilter : true;
   }
 
   // get stored/default expand property for this itemtype

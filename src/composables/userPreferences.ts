@@ -8,7 +8,7 @@ export interface ItemsListingPreferences {
   favoriteFilter?: boolean;
   libraryFilter?: boolean;
   albumArtistsFilter?: boolean;
-  hasMediaMappingsFilter?: boolean;
+  hideEmptyFilter?: boolean;
   albumType?: string[];
   providerFilter?: string[];
   expand?: boolean;
