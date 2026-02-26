@@ -63,9 +63,8 @@ const mode = useColorMode();
 onMounted(() => {
   const enabledMenuItems = DEFAULT_MENU_ITEMS.filter(
     (item) =>
-      localStorage.getItem(
-        `frontend.settings.menu_item_${item}_enabled`,
-      ) !== "false",
+      localStorage.getItem(`frontend.settings.menu_item_${item}_enabled`) !==
+      "false",
   );
   const storedTheme = localStorage.getItem("frontend.settings.theme") || "auto";
   mode.value = storedTheme as "light" | "dark" | "auto";
