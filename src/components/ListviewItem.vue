@@ -63,7 +63,7 @@
     </template>
 
     <!-- subtitle -->
-    <template #subtitle>
+    <template v-if="!showCheckboxes" #subtitle>
       <!-- track: artists(s) + album (check for provider_mappings to filter out ItemMapping) -->
       <div
         v-if="item.media_type == MediaType.TRACK && 'provider_mappings' in item"
@@ -145,7 +145,7 @@
     </template>
 
     <!-- actions -->
-    <template #append>
+    <template v-if="!showCheckboxes" #append>
       <!-- Now Playing Badge -->
       <NowPlayingBadge
         v-if="isPlaying"
