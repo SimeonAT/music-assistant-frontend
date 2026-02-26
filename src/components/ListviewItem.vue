@@ -2,7 +2,7 @@
 <template>
   <ListItem
     link
-    :show-menu-btn="showMenu"
+    :show-menu-btn="showCheckboxes ? false : showMenu"
     :class="{ unavailable: !isAvailable }"
     @click.stop="onClick"
     @menu.stop="onMenu"
