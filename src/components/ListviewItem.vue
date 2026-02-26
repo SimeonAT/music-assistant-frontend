@@ -9,7 +9,7 @@
   >
     <template #prepend>
       <!-- NOTE TO SELF: Checkboxes are displayed in the HTML element below .-->
-      <div v-if="showCheckboxes" class="media-thumb listitem-media-thumb">
+      <div v-if="showCheckboxes" class="media-thumb checkbox">
         <v-checkbox
           :model-value="isSelected"
           @click.stop
@@ -18,7 +18,11 @@
               if (x != null) emit('select', item, x);
             }
           "
-        />
+        >
+          <template #label>
+            <div class="checkbox-label">Hello!</div>
+          </template>
+        </v-checkbox>
       </div>
       <div v-else class="media-thumb listitem-media-thumb">
         <MediaItemThumb size="50" :item="isAvailable ? item : undefined" />
@@ -26,7 +30,7 @@
     </template>
 
     <!-- title -->
-    <template #title>
+    <template v-if="!showCheckboxes" #title>
       <span v-if="item.media_type == MediaType.FOLDER">
         <span>{{ getBrowseFolderName(item as BrowseFolder, t) }}</span>
       </span>
@@ -377,6 +381,16 @@ const onPlayClick = function (evt: PointerEvent) {
 </script>
 
 <style scoped>
+.checkbox {
+  position: relative;
+  height: 50px;
+  align-content: center;
+}
+
+.checkbox-label {
+  font-weight: bold;
+}
+
 .unavailable {
   opacity: 0.3;
 }
