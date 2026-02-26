@@ -119,13 +119,27 @@
           variant="ghost-icon"
           size="icon"
           class="player-command-btn"
+          :disabled="
+            api.queues[player.player_id]?.extra_attributes
+              ?.play_action_in_progress === true
+          "
           @click.stop="
             api.playerCommandPlayPause(player.player_id);
             store.activePlayerId = player.player_id;
           "
         >
+          <v-progress-circular
+            v-if="
+              api.queues[player.player_id]?.extra_attributes
+                ?.play_action_in_progress === true
+            "
+            indeterminate
+            :size="getBreakpointValue({ breakpoint: 'phone' }) ? 24 : 26"
+            :width="2"
+          />
           <component
             :is="player.playback_state == PlaybackState.PLAYING ? Pause : Play"
+            v-else
             :size="getBreakpointValue({ breakpoint: 'phone' }) ? 30 : 32"
           />
         </Button>
