@@ -8,7 +8,6 @@
     @menu.stop="onMenu"
   >
     <template #prepend>
-      <!-- NOTE TO SELF: Checkboxes are displayed in the HTML element below .-->
       <div v-if="showCheckboxes" class="checkbox">
         <v-checkbox
           :model-value="isSelected"
@@ -34,7 +33,6 @@
       <span v-if="item.media_type == MediaType.FOLDER">
         <span>{{ getBrowseFolderName(item as BrowseFolder, t) }}</span>
       </span>
-      <!-- NOTE TO SELF: This HTML element shows the name of a genre. -->
       <span v-else :class="{ 'is-playing': isPlaying }">
         {{ displayName }}
         <span v-if="'version' in item && item.version"
