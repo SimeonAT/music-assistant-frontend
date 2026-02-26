@@ -9,7 +9,7 @@
   >
     <template #prepend>
       <!-- NOTE TO SELF: Checkboxes are displayed in the HTML element below .-->
-      <div v-if="showCheckboxes" class="media-thumb checkbox">
+      <div v-if="showCheckboxes" class="checkbox">
         <v-checkbox
           :model-value="isSelected"
           @click.stop
@@ -383,7 +383,8 @@ const onPlayClick = function (evt: PointerEvent) {
 <style scoped>
 .checkbox {
   position: relative;
-  height: 50px;
+  height: 1em;
+  margin-top: 1.5em;
   align-content: center;
 }
 
