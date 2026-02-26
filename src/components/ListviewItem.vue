@@ -20,7 +20,7 @@
           "
         >
           <template #label>
-            <div class="checkbox-label">Hello!</div>
+            <div class="checkbox-label">{{ displayName }}</div>
           </template>
         </v-checkbox>
       </div>
@@ -388,7 +388,7 @@ const onPlayClick = function (evt: PointerEvent) {
 }
 
 .checkbox-label {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .unavailable {
