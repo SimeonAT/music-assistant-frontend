@@ -78,7 +78,7 @@ const baseIcon = computed(() => {
 const isLoading = computed(() => {
   if (!compProps.player) return false;
   return (
-    compProps.playerQueue?.extra_data?.play_action_in_progress === true
+    compProps.playerQueue?.extra_attributes?.play_action_in_progress === true
   );
 });
 </script>
