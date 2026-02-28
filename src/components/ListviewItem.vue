@@ -19,7 +19,11 @@
           "
         >
           <template #label>
-            <ListviewitemTitle :display-name="displayName" :item="item" />
+            <ListviewitemTitle
+              :display-name="displayName"
+              :item="item"
+              :show-checkboxes="showCheckboxes"
+            />
           </template>
         </v-checkbox>
       </div>
@@ -30,7 +34,11 @@
 
     <!-- title -->
     <template v-if="!showCheckboxes" #title>
-      <ListviewitemTitle :display-name="displayName" :item="item" />
+      <ListviewitemTitle
+        :display-name="displayName"
+        :item="item"
+        :show-checkboxes="showCheckboxes"
+      />
     </template>
 
     <!-- subtitle -->

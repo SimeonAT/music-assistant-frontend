@@ -17,6 +17,7 @@
     <template #activator="{ props }">
       <v-icon
         v-if="parseBool(item.metadata.explicit || false)"
+        class="{ 'explicit-icon-margin-left' : showCheckboxes }"
         v-bind="props"
         icon="mdi-alpha-e-box"
         width="35"
@@ -39,6 +40,7 @@ import { useI18n } from "vue-i18n";
 export interface Props {
   displayName: string;
   item: MediaItemType;
+  showCheckboxes: boolean;
 }
 
 // global refs
@@ -46,11 +48,18 @@ const { t } = useI18n();
 
 const compProps = withDefaults(defineProps<Props>(), {
   displayName: "",
+  showCheckboxes: false,
 });
 </script>
 
 <style scoped>
 .checkbox-label {
   font-weight: 500;
+}
+
+/* When checkbox is displayed, explicit icon will be shown to the right of the title.
+   This adds a bit of spacing between the title and the explicit icon. */
+.explicit-icon-margin-left {
+  margin-left: 0.2em;
 }
 </style>
