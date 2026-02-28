@@ -19,7 +19,7 @@
           "
         >
           <template #label>
-            <ListviewitemTitle :display-name="displayName" />
+            <ListviewitemTitle :display-name="displayName" :item="item" />
           </template>
         </v-checkbox>
       </div>

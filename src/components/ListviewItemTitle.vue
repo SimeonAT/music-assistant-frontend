@@ -2,6 +2,7 @@
 <template v-if="!showCheckboxes">
   <div class="checkbox-label">
     {{ displayName }}
+    <span v-if="'version' in item && item.version"> ({{ item.version }}) </span>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import {
 // properties
 export interface Props {
   displayName: string;
+  item: MediaItemType;
 }
 
 const compProps = withDefaults(defineProps<Props>(), {
