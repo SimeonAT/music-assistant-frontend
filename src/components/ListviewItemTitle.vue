@@ -9,8 +9,8 @@
     <span
       v-if="item.media_type == MediaType.TRACK && item.metadata?.release_date"
     >
-      ({{ new Date(item.metadata.release_date).getFullYear() }})</span
-    >
+      ({{ new Date(item.metadata.release_date).getFullYear() }})
+    </span>
   </div>
   <!-- explicit icon -->
   <v-tooltip v-if="item && item.metadata" location="bottom">
