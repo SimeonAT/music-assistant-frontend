@@ -19,7 +19,12 @@
           "
         >
           <template #label>
-            <div class="checkbox-label">{{ displayName }}</div>
+            <div class="checkbox-label">
+              {{ displayName }}
+              <span v-if="'version' in item && item.version">
+                ({{ item.version }})
+              </span>
+            </div>
           </template>
         </v-checkbox>
       </div>
