@@ -30,34 +30,7 @@
 
     <!-- title -->
     <template v-if="!showCheckboxes" #title>
-      <span v-if="item.media_type == MediaType.FOLDER">
-        <span>{{ getBrowseFolderName(item as BrowseFolder, t) }}</span>
-      </span>
-      <span v-else :class="{ 'is-playing': isPlaying }">
-        {{ displayName }}
-        <span v-if="'version' in item && item.version"
-          >({{ item.version }})</span
-        >
-        <span
-          v-if="
-            item.media_type == MediaType.TRACK && item.metadata?.release_date
-          "
-        >
-          ({{ new Date(item.metadata.release_date).getFullYear() }})</span
-        >
-      </span>
-      <!-- explicit icon -->
-      <v-tooltip v-if="item && item.metadata" location="bottom">
-        <template #activator="{ props }">
-          <v-icon
-            v-if="parseBool(item.metadata.explicit || false)"
-            v-bind="props"
-            icon="mdi-alpha-e-box"
-            width="35"
-          />
-        </template>
-        <span>{{ $t("tooltip.explicit") }}</span>
-      </v-tooltip>
+      <ListviewitemTitle :display-name="displayName" :item="item" />
     </template>
 
     <!-- subtitle -->
