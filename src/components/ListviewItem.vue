@@ -19,12 +19,7 @@
           "
         >
           <template #label>
-            <div class="checkbox-label">
-              {{ displayName }}
-              <span v-if="'version' in item && item.version">
-                ({{ item.version }})
-              </span>
-            </div>
+            <ListviewitemTitle :display-name="displayName" />
           </template>
         </v-checkbox>
       </div>
@@ -264,6 +259,8 @@ import { VTooltip } from "vuetify/components";
 import MediaItemThumb from "./MediaItemThumb.vue";
 import ProviderIcon from "./ProviderIcon.vue";
 import { iconHiRes } from "./QualityDetailsBtn.vue";
+
+import ListviewitemTitle from "./ListviewItemTitle.vue";
 
 // properties
 export interface Props {
