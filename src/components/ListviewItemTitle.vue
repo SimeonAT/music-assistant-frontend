@@ -42,7 +42,7 @@ export interface Props {
 }
 
 // global refs
-const { t, te } = useI18n();
+const { t } = useI18n();
 
 const compProps = withDefaults(defineProps<Props>(), {
   displayName: "",
