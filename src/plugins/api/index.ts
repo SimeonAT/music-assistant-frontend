@@ -917,7 +917,7 @@ export class MusicAssistantApi {
     order_by?: string,
     provider?: string | string[],
     genre?: number | number[],
-    hide_empty?: boolean,
+    hide_empty?: boolean | null,
   ): Promise<Genre[]> {
     return this.sendCommand("music/genres/library_items", {
       favorite,
@@ -2010,7 +2010,6 @@ export class MusicAssistantApi {
       if (queue.queue_id in this.queues)
         Object.assign(this.queues[queue.queue_id], queue);
       else this.queues[queue.queue_id] = queue;
-      this.queues[queue.queue_id].elapsed_time_last_updated = Date.now() / 1000;
     } else if (msg.event == EventType.QUEUE_TIME_UPDATED) {
       const queueId = msg.object_id as string;
       if (queueId in this.queues) {
