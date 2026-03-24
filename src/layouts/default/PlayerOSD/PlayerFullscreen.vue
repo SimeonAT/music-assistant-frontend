@@ -446,7 +446,7 @@
             max-height="45px"
             :size="28"
           />
-          <div class="play-btn-wrapper">
+          <div class="play-btn-wrapper" :style="playBtnStyle">
             <PlayBtn
               :player="store.activePlayer"
               :player-queue="store.activePlayerQueue"
@@ -600,6 +600,15 @@ interface Props {
   colorPalette: ImageColorPalette;
 }
 const compProps = defineProps<Props>();
+
+const playBtnStyle = computed(() => {
+  const isDark = vuetify.theme.current.value.dark;
+  const color = isDark
+    ? compProps.colorPalette.darkColor
+    : compProps.colorPalette.lightColor;
+  if (!color) return {};
+  return { "--play-icon-color": color };
+});
 
 const playerMarqueeSync = new MarqueeTextSync();
 const hoveredQueueIndex = ref(-1);
@@ -1465,6 +1474,10 @@ watchEffect(() => {
   // Keep color between text and sliders consistent.
   // Also, this text color has a better contrast than the automatically selected one
   document.documentElement.style.setProperty("--text-color", textColor.hex());
+  document.documentElement.style.setProperty(
+    "--text-color-inverse",
+    isLight ? DARK_TEXT_COLOR.hex() : LIGHT_TEXT_COLOR.hex(),
+  );
   sliderColor.value = textColor.hex();
   const topColor = bgColor.lighten(0.25);
   const bottomColor = bgColor.darken(0.25);
@@ -1680,10 +1693,51 @@ button {
   color: var(--text-color);
 }
 
+.play-btn-wrapper :deep(.play-btn-icon) {
+  background-color: var(--text-color) !important;
+}
+
+.player-bottom :deep([data-slot="slider-range"]) {
+  background-color: var(--text-color) !important;
+}
+
+.player-bottom :deep([data-slot="slider-thumb"])::before {
+  background-color: var(--text-color) !important;
+}
+
+.player-bottom :deep([data-slot="slider-track"])::before {
+  background-color: color-mix(
+    in srgb,
+    var(--text-color) 24%,
+    transparent
+  ) !important;
+}
+
 .lyrics-wrapper {
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+
+.lyrics-wrapper :deep(.lyrics-line),
+.lyrics-wrapper :deep(.break-note) {
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+  .lyrics-wrapper :deep(.lyrics-line),
+  .lyrics-wrapper :deep(.break-note) {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .lyrics-wrapper :deep(.lyrics-line),
+  .lyrics-wrapper :deep(.break-note) {
+    font-size: clamp(1.4rem, 2vw, 2.2rem);
+  }
 }
 
 .title-row {

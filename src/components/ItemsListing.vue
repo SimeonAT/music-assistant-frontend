@@ -1169,6 +1169,8 @@ const restoreSettings = async function () {
     viewMode.value = "panel";
   } else if (props.itemtype == "albums") {
     viewMode.value = "panel";
+  } else if (props.itemtype == "genres") {
+    viewMode.value = "panel_compact";
   } else {
     viewMode.value = "list";
   }
@@ -1346,17 +1348,13 @@ const loadGenreOptions = async () => {
     const mediaType = itemtypeToMediaType[props.itemtype];
 
     do {
-      page = await api.getLibraryGenres(
-        undefined,
-        undefined,
-        pageSize,
+      page = await api.getLibraryGenres({
+        limit: pageSize,
         offset,
-        "name",
-        undefined,
-        undefined,
-        true, // always hide empty genres in the filter dropdown
-        mediaType, // filter to genres relevant for this media type
-      );
+        order_by: "name",
+        hide_empty: true, // always hide empty genres in the filter dropdown
+        media_type: mediaType, // filter to genres relevant for this media type
+      });
       for (const genre of page) {
         all.push({
           label: getGenreDisplayName(genre.name, genre.translation_key, t, te),
