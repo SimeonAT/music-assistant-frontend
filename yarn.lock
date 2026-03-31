@@ -2019,17 +2019,17 @@
   dependencies:
     tslib "^2.8.0"
 
-"@tabler/icons-vue@^3.40.0":
-  version "3.40.0"
-  resolved "https://registry.npmjs.org/@tabler/icons-vue/-/icons-vue-3.40.0.tgz"
-  integrity sha512-DyAOsnL6p3THhI8/74WvCFu86vlNI8U6DKtNHnYYjQpljtENLIy6i/bLiug3Lr04S71yKTWNxYyfd/8K8YFzQw==
+"@tabler/icons-vue@^3.41.1":
+  version "3.41.1"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-vue/-/icons-vue-3.41.1.tgz#c7c79984d8125e112556f114754227d8a70cefca"
+  integrity sha512-OLLWlyrx6HdQpdgnZ8dO8uBGIIZwQDPgE8Gl6tUuAD7AgtfnmtFz8vb7dTEvxddM5CMpPt21ogPpBhJfEjSY+Q==
   dependencies:
-    "@tabler/icons" "3.40.0"
+    "@tabler/icons" "3.41.1"
 
-"@tabler/icons@3.40.0":
-  version "3.40.0"
-  resolved "https://registry.npmjs.org/@tabler/icons/-/icons-3.40.0.tgz"
-  integrity sha512-V/Q4VgNPKubRTiLdmWjV/zscYcj5IIk+euicUtaVVqF6luSC9rDngYWgST5/yh3Mrg/mYUwRv1YVTk71Jp0twQ==
+"@tabler/icons@3.41.1":
+  version "3.41.1"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-3.41.1.tgz#dff9c77af287c73c2fcab4074cfa9f2069f9b7ee"
+  integrity sha512-OaRnVbRmH2nHtFeg+RmMJ/7m2oBIF9XCJAUD5gQnMrpK9f05ydj8MZrAf3NZQqOXyxGN1UBL0D5IKLLEUfr74Q==
 
 "@tailwindcss/node@4.2.2":
   version "4.2.2"
@@ -2843,10 +2843,10 @@
     js-beautify "^1.14.9"
     vue-component-type-helpers "^2.0.0"
 
-"@vue/tsconfig@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.npmjs.org/@vue/tsconfig/-/tsconfig-0.9.0.tgz"
-  integrity sha512-RP+v9Cpbsk1ZVXltCHHkYBr7+624x6gcijJXVjIcsYk7JXqvIpRtMwU2ARLvWDhmy9ffdFYxhsfJnPztADBohQ==
+"@vue/tsconfig@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@vue/tsconfig/-/tsconfig-0.9.1.tgz#6aa901e9f89242b26e1e564c98747278df6882e5"
+  integrity sha512-buvjm+9NzLCJL29KY1j1991YYJ5e6275OiK+G4jtmfIb+z4POywbdm0wXusT9adVWqe0xqg70TbI7+mRx4uU9w==
 
 "@vuetify/loader-shared@^2.1.2":
   version "2.1.2"
@@ -5396,10 +5396,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lucide-vue-next@^0.577.0:
-  version "0.577.0"
-  resolved "https://registry.npmjs.org/lucide-vue-next/-/lucide-vue-next-0.577.0.tgz"
-  integrity sha512-py05bAfv9SHVJqscbiOnjcnLlEmOffA58a+7XhZuFxrs6txe1E8VoR1ngWGTYO+9aVKABAz8l3ee3PqiQN9QPA==
+lucide-vue-next@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-1.0.0.tgz#663ad26b7bfa327c7662b75bb0b843ebe749a31b"
+  integrity sha512-V6SPvx1IHTj/UY+FrIYWV5faISsPSb8BnWSFDxAtezWKvWc9ZZ40PDrdu1/Qb5vg4lHWr1hs1BAMGVGm6V1Xdg==
 
 magic-string-ast@^1.0.2:
   version "1.0.3"
@@ -6671,10 +6671,10 @@ svgo@^3.3.3:
     picocolors "^1.0.0"
     sax "^1.5.0"
 
-swiper@^12.1.2:
-  version "12.1.2"
-  resolved "https://registry.npmjs.org/swiper/-/swiper-12.1.2.tgz"
-  integrity sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==
+swiper@^12.1.3:
+  version "12.1.3"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-12.1.3.tgz#0fd256e6ee043c85c077b0fa48faef7ed6acb051"
+  integrity sha512-XcWlVmkHFICI4fuoJKgbp8PscDcS4i7pBH8nwJRBi3dpQvhCySwsWRYm4bOf/BzKVWkHOYaFw7qz9uBSrY3oug==
 
 symbol-tree@^3.2.4:
   version "3.2.4"
@@ -7334,10 +7334,10 @@ webrtc-adapter@8.2.3:
   dependencies:
     sdp "^3.2.0"
 
-websocket-ts@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/websocket-ts/-/websocket-ts-2.2.1.tgz"
-  integrity sha512-YKPDfxlK5qOheLZ2bTIiktZO1bpfGdNCPJmTEaPW7G9UXI1GKjDdeacOrsULUS000OPNxDVOyAuKLuIWPqWM0Q==
+websocket-ts@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/websocket-ts/-/websocket-ts-2.3.0.tgz#e0f69de04566128b672d75bc84ed8e67a21e26e4"
+  integrity sha512-DocKMdXx7i8TCBMU+XUKZeUaKwQ7O2NPlxUcgb0poG4RwDrIqBo19mRdW00a1Sm7MSijhIEsgv9UJ0kB/qNy+Q==
 
 whatwg-mimetype@^3.0.0:
   version "3.0.0"
