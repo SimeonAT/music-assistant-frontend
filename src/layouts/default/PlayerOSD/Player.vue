@@ -10,6 +10,16 @@
           :color-palette="coverImageColorPalette"
           :primary-color="$vuetify.theme.current.dark ? '#fff' : '#000'"
         />
+        <!-- favorite button for current track -->
+        <FavoriteButton
+          v-if="
+            store.curQueueItem?.media_item &&
+            getBreakpointValue('bp7') &&
+            store.activePlayer?.powered !== false
+          "
+          :item="store.curQueueItem.media_item"
+          class="mediacontrols-favorite"
+        />
       </div>
       <div class="mediacontrols-bottom-center">
         <!-- player control buttons -->
@@ -124,6 +134,7 @@ import { getBreakpointValue } from "@/plugins/breakpoint";
 import { store } from "@/plugins/store";
 import vuetify from "@/plugins/vuetify";
 import { computed, ref, watch } from "vue";
+import FavoriteButton from "@/components/FavoriteButton.vue";
 import PlayerControls from "./PlayerControls.vue";
 import PlayerExtendedControls from "./PlayerExtendedControls.vue";
 import PlayerTimeline from "./PlayerTimeline.vue";
@@ -212,7 +223,8 @@ watch(
   padding: 10px 15px;
   background-color: rgb(var(--v-theme-overlay));
   .mediacontrols-bottom-center {
-    width: 40%;
+    flex: 0 1 40%;
+    min-width: 0;
   }
 
   &[data-mobile="true"] {
@@ -224,6 +236,7 @@ watch(
     .mediacontrols-left {
       flex: 1;
       min-width: 0;
+      max-width: none;
     }
   }
 }
@@ -252,15 +265,26 @@ watch(
 }
 
 .mediacontrols-left {
-  margin-inline-end: auto;
-  width: 20%;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   > div {
     padding: 0px !important;
+    min-width: 0;
   }
 }
 
+.mediacontrols-favorite {
+  flex-shrink: 0;
+}
+
 .mediacontrols-bottom-right {
-  margin-inline-start: auto;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
   > div {
     display: inline-flex;
     align-items: center;
